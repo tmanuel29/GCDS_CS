@@ -93,7 +93,11 @@ def randomize_name(chars):
         result += char
     return result
 
-
+def palindrome_searcher(name):
+    first = return_first_name(name)
+    lower = to_lowercase(first)
+    return lower == reverse(lower)
+    
     
 
 
@@ -110,7 +114,8 @@ def main():
         print("8 to lowercase")
         print("9 to uppercase")
         print("10 create random name")
-        print("11 exit")
+        print("11 Palindrom searcher")
+        print("12 exit")
         choice = input("Choose a number ")
 
         if choice == "1":
@@ -134,6 +139,8 @@ def main():
         elif choice == "10":
             print(randomize_name(name))
         elif choice == "11":
+            print(palindrome_searcher(name))
+        elif choice == "12":
             print("Exiting the program. Goodbye!")
             break
         else:
