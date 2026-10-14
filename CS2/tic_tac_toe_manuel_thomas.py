@@ -14,11 +14,68 @@ step 9: at the end of game clear board - ask to play again - quit
 
 
 '''
-def display_board(board):
-    for row in board:
-        print(" | ".join(row))
 
-game_board = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
+import random  
+
+
+def display_board(board):
+    for i in range(len(board)):
+        print(" " + " │ ".join(board[i]) + " ")
+        if i < len(board) - 1:
+            print("───┼───┼───")
+
+
 
 display_board(game_board)
 input()
+
+def checkwinner(board, complete):
+
+
+    if board[0][0] == complete and board[0][1] == complete and board[0][2]== complete: 
+        return True
+    if board[1][0] == complete and board[1][1] == complete and board[1][2] == complete:
+        return True
+    if board[2][0] == complete and board[2][1] == complete and board[2][2] == complete:
+        return True
+
+
+    if board[0][0] == complete and board[0][1] == complete and board[0][2]== complete: 
+            return True
+    if board[0][1] == complete and board[1][1] == complete and board[2][1] == complete:
+            return True
+    if board[0][2] == complete and board[1][2] == complete and board[2][2] == complete:
+            return True
+
+    if board[0][0] == complete and board[1][1] == complete and board[2][2] == complete:
+         return True
+    if board[0][2] == complete and board[1][1] == complete and board[2][0] == complete:
+         return True
+
+
+def tie_checker(board):
+    for row in board:
+        for cell in row:
+            if cell == " ":
+                return False
+    return True
+
+
+def choose_first():
+    player1 = input("Player number 1 name: ")
+    player2 = input("Player number 2 name: ")
+    
+    first = random.choice([player1, player2])
+    
+    if first == player1:
+        second = player2
+    else:
+        second = player1
+    print(first + "goes first! ")
+    return first, second
+
+
+if __name__ == "__main__":
+    game_board = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
+    first, second = choose_first()
+    display_board(game_board)
