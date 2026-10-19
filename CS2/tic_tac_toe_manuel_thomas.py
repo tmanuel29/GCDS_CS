@@ -24,7 +24,6 @@ import random
 
 
 def display_board(board):
-    """Print the board with row and column labels."""
     print("   1   2   3")
     for i in range(len(board)):
         print(str(i + 1) + "  " + " │ ".join(board[i]) + " ")
@@ -33,8 +32,6 @@ def display_board(board):
 
 
 def check_winner(board, mark):
-    """Return True if the given mark ('X' or 'O') has three in a row."""
-    
     if board[0][0] == mark and board[0][1] == mark and board[0][2] == mark:
         return True
     if board[1][0] == mark and board[1][1] == mark and board[1][2] == mark:
@@ -42,7 +39,6 @@ def check_winner(board, mark):
     if board[2][0] == mark and board[2][1] == mark and board[2][2] == mark:
         return True
 
-  
     if board[0][0] == mark and board[1][0] == mark and board[2][0] == mark:
         return True
     if board[0][1] == mark and board[1][1] == mark and board[2][1] == mark:
@@ -59,8 +55,7 @@ def check_winner(board, mark):
 
 
 def is_draw(board):
-    """Return True if every cell is filled (call this after checking for a winner)."""
-    for row in board:
+    for row in board: 
         for cell in row:
             if cell == " ":
                 return False
@@ -68,7 +63,6 @@ def is_draw(board):
 
 
 def choose_first():
-    """Ask for both players' names and randomly pick who goes first."""
     player1 = input("Player number 1 name: ")
     player2 = input("Player number 2 name: ")
 
@@ -83,12 +77,12 @@ def choose_first():
 
 
 def get_player_move(board, player):
-    """Ask the player for a row and column, re-asking until the move is valid."""
+  
     while True:
         row = input("Player " + player + ", enter a row (1-3): ")
         col = input("Player " + player + ", enter a column (1-3): ")
 
-   
+        
         try:
             row = int(row)
             col = int(col)
@@ -101,7 +95,7 @@ def get_player_move(board, player):
             print("Out of range. Rows and columns go from 1 to 3.")
             continue
 
-       
+        
         if board[row - 1][col - 1] != " ":
             print("That spot is already taken. Pick another one.")
             continue
@@ -109,9 +103,58 @@ def get_player_move(board, player):
         return row - 1, col - 1
 
 
+def play_game():
+  
+    while True:
+       
+        board = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
+        first, second = choose_first()
+
+       
+        first_mark = input(first + ", choose X or O: ").upper()
+        while first_mark != "X" and first_mark != "O":
+            first_mark = input("Invalid. Please type X or O: ").upper()
+
+        if first_mark == "X":
+            second_mark = "O"
+        else:
+            second_mark = "X"
+
+        turn = 0  
+
+        while True:
+           
+            if turn % 2 == 0:
+                current_player = first
+                current_mark = first_mark
+            else:
+                current_player = second
+                current_mark = second_mark
+
+            display_board(board)
+            print(current_player + "'s turn (" + current_mark + ")")
+
+            row, col = get_player_move(board, current_mark)
+            board[row][col] = current_mark
+
+       
+            if check_winner(board, current_mark):
+                display_board(board)
+                print(current_player + " wins!")
+                break
+
+            if is_draw(board):
+                display_board(board)
+                print("It's a tie!")
+                break
+
+            turn += 1
+
+        again = input("Play again? yes or no: ").lower()
+        if again != "y":
+            print("Thanks for playing!")
+            break
 
 
 if __name__ == "__main__":
-    game_board = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
-    first, second = choose_first()
-    display_board(game_board)
+    play_game()
