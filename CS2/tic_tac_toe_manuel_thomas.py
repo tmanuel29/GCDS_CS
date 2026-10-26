@@ -1,8 +1,9 @@
 '''
+
 Name:        Thomas Manuel
 Date:        10/19/26
 Description: A two-player Tic-Tac-Toe game that runs in
-              the terminal.
+             the terminal.
 Extensions:
 
 
@@ -25,6 +26,7 @@ import random
 def display_board(board):
 
     print("   1   2   3")
+    
     for i in range(3):
         row = board[i]
         print(str(i + 1) + "  " + row[0] + " | " + row[1] + " | " + row[2])
@@ -37,14 +39,19 @@ def check_winner(board, mark):
     for i in range(3):
    
         if board[i][0] == mark and board[i][1] == mark and board[i][2] == mark:
+
             return True
      
         if board[0][i] == mark and board[1][i] == mark and board[2][i] == mark:
+
             return True
 
     if board[0][0] == mark and board[1][1] == mark and board[2][2] == mark:
+
         return True
+    
     if board[0][2] == mark and board[1][1] == mark and board[2][0] == mark:
+
         return True
 
     return False
@@ -61,8 +68,11 @@ def is_draw(board):
 def choose_first():
 
     players = [input("Player 1 name: "), input("Player 2 name: ")]
+
     random.shuffle(players) 
+
     print(players[0] + " goes first!")
+
     return players[0], players[1]
 
 
@@ -71,15 +81,22 @@ def get_player_move(board, mark):
     while True:
         try:
             row = int(input("Player " + mark + ", enter a row (1-3): "))
+
             col = int(input("Player " + mark + ", enter a column (1-3): "))
         except ValueError:
+
             print("Invalid input. Please enter numbers only.")
+
             continue
+
 
         if row < 1 or row > 3 or col < 1 or col > 3:
             print("Out of range. Rows and columns go from 1 to 3.")
+
         elif board[row - 1][col - 1] != " ":
+
             print("That spot is already taken. Pick another one.")
+        
         else:
             return row - 1, col - 1 
 
@@ -87,24 +104,31 @@ def get_player_move(board, mark):
 def play_game():
 
     while True:
+
         board = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
         first, second = choose_first()
 
        
         first_mark = input(first + ", choose X or O: ").upper()
+
         while first_mark != "X" and first_mark != "O":
+
             first_mark = input("Invalid. Please type X or O: ").upper()
 
         if first_mark == "X":
+
             second_mark = "O"
+
         else:
             second_mark = "X"
 
         turn = 0
+
         while True:
             
             if turn % 2 == 0:
                 player, mark = first, first_mark
+
             else:
                 player, mark = second, second_mark
 
@@ -121,10 +145,13 @@ def play_game():
                 result = "It's a tie!"
                 break
 
+
             turn += 1
+
 
         display_board(board)
         print(result)
+
 
         again = input("Play again? yes or no: ").lower()
         if not again.startswith("y"):
