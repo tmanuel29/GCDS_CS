@@ -24,6 +24,13 @@ import random
 
 
 def display_board(board):
+    """
+    Description: Print the current board to the terminal with row and
+    column numbers so players can see where to move.
+
+    Args:
+    - board: a 3x3 list of lists holding "X", "O", or " " in each spot
+    """
 
     print("   1   2   3")
     
@@ -35,6 +42,17 @@ def display_board(board):
 
 
 def check_winner(board, mark):
+    """
+    Description: Check whether the given mark has three in a row
+    horizontally, vertically, or diagonally.
+
+    Args:
+    - board: a 3x3 list of lists holding "X", "O", or " " in each spot
+    - mark: the player's mark to check for, either "X" or "O"
+
+    Returns:
+    - bool: True if that mark has won, False otherwise
+    """
 
     for i in range(3):
    
@@ -58,6 +76,16 @@ def check_winner(board, mark):
 
 
 def is_draw(board):
+    """
+    Description: Check whether the board is full with no empty spots left,
+    meaning the game is a tie (if no one has won).
+
+    Args:
+    - board: a 3x3 list of lists holding "X", "O", or " " in each spot
+
+    Returns:
+    - bool: True if every spot is filled, False if any spot is empty
+    """
    
     for row in board:
         if " " in row:
@@ -66,6 +94,13 @@ def is_draw(board):
 
 
 def choose_first():
+    """
+    Description: Ask for both players' names, then randomly pick who
+    goes first and announce it.
+
+    Returns:
+    - tuple: (first player's name, second player's name)
+    """
 
     players = [input("Player 1 name: "), input("Player 2 name: ")]
 
@@ -77,6 +112,18 @@ def choose_first():
 
 
 def get_player_move(board, mark):
+    """
+    Description: Ask the player for a row and column and keep asking
+    until they enter a valid, empty spot. Handles non-number input,
+    out-of-range numbers, and spots that are already taken.
+
+    Args:
+    - board: a 3x3 list of lists holding "X", "O", or " " in each spot
+    - mark: the current player's mark, either "X" or "O"
+
+    Returns:
+    - tuple: (row index, column index) of the chosen spot, each 0-2
+    """
   
     while True:
         try:
@@ -102,6 +149,11 @@ def get_player_move(board, mark):
 
 
 def play_game():
+    """
+    Description: Run the main game loop. Sets up a new board, picks who
+    goes first, lets them choose X or O, alternates turns until someone
+    wins or it's a tie, then asks if the players want to play again.
+    """
 
     while True:
 
