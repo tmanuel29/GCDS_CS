@@ -205,10 +205,15 @@ def play_game():
         print(result)
 
 
-        again = input("Play again? yes or no: ").lower()
-        if not again.startswith("y"):
-            print("Thanks for playing!")
-            break
+        while True:
+            again = input("Play again? yes or no: ").lower()
+            if again.startswith("y"):
+                break
+            elif again.startswith("n"):
+                print("Thanks for playing!")
+                return
+            else:
+                print("Invalid response, please choose yes or no ")
 
 
 if __name__ == "__main__":
