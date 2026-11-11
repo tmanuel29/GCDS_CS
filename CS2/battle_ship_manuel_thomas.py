@@ -23,8 +23,15 @@ display_board(board)
 
 def display_hidden_board():
     hidden = []
-
-
+    for row in board:
+        new_row = []
+        for spot in row:
+            if spot == "S":
+                new_row.append("~")
+            else:
+                new_row.append(spot)
+        hidden.append(new_row)
+    display_board(hidden)
 
 
 
@@ -76,3 +83,20 @@ def computer_guess(board):
             print("The Computer guessed and " + spot + " it Missed.")
 
         return
+
+
+
+def get_player_move(board):
+    while True:
+        try:
+            row = int(input("Please enter a guess, enter a row (1-5)  "))
+            col = int(input("Please enter a guess, enter a column (A,B,C,D,E) "))
+        except ValueError:
+            print("Invalid selection, please enter the correct numbers and letter for rows and columns")
+
+            continue
+
+        if row < 1 or row > 5 or col < 1 or col > 5:
+            print("Plese enter a number that is on the board, rows go from 1-5 and columns from A-E ")
+
+            
