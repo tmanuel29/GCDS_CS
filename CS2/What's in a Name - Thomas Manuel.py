@@ -1,17 +1,18 @@
+
 # ***
 # Program:     What's In a Name
 # Author:      Thomas Manuel
 # Date:        9/30/26
 # Description: An interactive command-line program that performs various string
 #              manipulations on user-inputted names
-# Log:   1.0 - original code
+#Log:   1.0 - original code
 #        1.1 - fixed code so that user does not have to enter name over and over
 #        1.2 - added line by line documentation / not for every line / repeated lines dont have over and over - for important lines
 # ***
 
 
 
-import random                                                           # lets the program pick things at random
+import random                                                           # brings in Python's dice roller
 
 
 
@@ -23,11 +24,11 @@ def reverse(name):
 
     Returns: string (the reversed text)
     """
-    result = ""                                                         # starts with an empty string
-    for i in range(len(name) - 1, -1, -1):                              # loops from the last character to the first
-        result = result + name[i]                                       # adds each character to the result
+    result = ""                                                         # blank slate to build the new name
+    for i in range(len(name) - 1, -1, -1):                              # walks backward from the last letter
+        result = result + name[i]                                       # tacks each letter onto the end
 
-    return result                                                       # gives back the finished string
+    return result                                                       # hands back the name, flipped
 
 
 def vowel_counter(name):
@@ -38,12 +39,12 @@ def vowel_counter(name):
 
     Returns: integer (count of vowels)
     """
-    count = 0                                                           # starts the count at zero
-    for i in range(len(name)):                                          # loops through each character
-        if name[i] in "AIUEOaieuo":                                     # checks if the character is a vowel
-            count = count + 1                                           # adds 1 to the count
+    count = 0                                                           # tally starts at zero
+    for i in range(len(name)):                                          # visits every character one by one
+        if name[i] in "AIUEOaieuo":                                     # is it a vowel?
+            count = count + 1                                           # yep, add one to the tally
 
-    return count                                                        # gives back the total count
+    return count                                                        # final vowel score
 
 
 def consonant_counter(name):
@@ -56,10 +57,10 @@ def consonant_counter(name):
     """
     count = 0
     for i in range(len(name)):
-        if name[i] in "BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz":     # checks if it's a consonant
+        if name[i] in "BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz":     # is it a consonant?
             count = count + 1
 
-    return count
+    return count                                                        # final consonant score
 
 
 def return_first_name(name):
@@ -70,11 +71,11 @@ def return_first_name(name):
 
     Returns: string (the first name or error message)
     """
-    parts = name.strip().split()                                        # removes extra spaces and splits into words
-    if len(parts) > 0:                                                  # makes sure at least one word was typed
-        return parts[0]                                                 # the first word is the first name
+    parts = name.strip().split()                                        # trims spaces and chops the name into words
+    if len(parts) > 0:                                                  # did they type anything at all?
+        return parts[0]                                                 # word #1 is the first name
 
-    return "No name provided"                                           # runs if nothing was typed
+    return "No name provided"                                           # nothing typed, nothing to show
 
 
 def return_middle_name(name):
@@ -86,10 +87,10 @@ def return_middle_name(name):
     Returns: string (the middle name or error message)
     """
     parts = name.strip().split()
-    if len(parts) > 2:                                                  # a middle name needs at least 3 words
-        return " ".join(parts[1:-1])                                    # joins every word between first and last
+    if len(parts) > 2:                                                  # need 3+ words to have a middle
+        return " ".join(parts[1:-1])                                    # glues together everything between first and last
 
-    return "No middle name"                                             # runs if there are fewer than 3 words
+    return "No middle name"                                             # too short for a middle name
 
 
 def return_last_name(name):
@@ -101,10 +102,10 @@ def return_last_name(name):
     Returns: string (the last name or error message)
     """
     parts = name.strip().split()
-    if len(parts) >= 2:                                                 # a last name needs at least 2 words
-        return parts[-1]                                                # the last word is the last name
+    if len(parts) >= 2:                                                 # need 2+ words to have a last name
+        return parts[-1]                                                # -1 grabs the very last word
 
-    return "No last name"                                               # runs if there is only one word
+    return "No last name"                                               # just one word, so no last name
 
 
 def hyphen_searcher(name):
@@ -116,10 +117,10 @@ def hyphen_searcher(name):
     Returns: boolean (True if hyphen found, False if not)
     """
     parts = name.strip().split()
-    if parts:                                                           # makes sure the list isn't empty
-        return "-" in parts[-1]                                         # True if the last word has a hyphen
+    if parts:                                                           # only look if the list isn't empty
+        return "-" in parts[-1]                                         # True if the last name has a dash
 
-    return False                                                        # no name means no hyphen
+    return False                                                        # no name, no hyphen
 
 
 def to_lowercase(name):
@@ -132,13 +133,13 @@ def to_lowercase(name):
     """
     result = ""
     for i in range(len(name)):
-        code = ord(name[i])                                             # gets the character's number code
-        if code >= 65 and code <= 90:                                   # 65 to 90 are the codes for A to Z
-            result = result + chr(code + 32)                            # adding 32 makes it lowercase
-        else:                                                           # anything that isn't a capital letter stays the same
+        code = ord(name[i])                                             # turns the letter into its secret number code
+        if code >= 65 and code <= 90:                                   # 65-90 is the A-Z zone
+            result = result + chr(code + 32)                            # +32 shrinks it to lowercase
+        else:                                                           # not a capital? leave it alone
             result = result + name[i]
 
-    return result
+    return result                                                       # the whole name, now quiet
 
 
 def to_uppercase(name):
@@ -152,12 +153,12 @@ def to_uppercase(name):
     result = ""
     for i in range(len(name)):
         code = ord(name[i])
-        if code >= 97 and code <= 122:                                  # 97 to 122 are the codes for a to z
-            result = result + chr(code - 32)                            # subtracting 32 makes it uppercase
+        if code >= 97 and code <= 122:                                  # 97-122 is the a-z zone
+            result = result + chr(code - 32)                            # -32 pumps it up to uppercase
         else:
             result = result + name[i]
 
-    return result
+    return result                                                       # the whole name, now LOUD
 
 
 def randomize_letters(chars):
@@ -168,15 +169,17 @@ def randomize_letters(chars):
 
     Returns: string (the randomized name)
     """
-    shuffled = random.sample(chars, len(chars))                         # makes a shuffled copy
-    for i in range(len(chars)):                                         # loops through each spot in the list
-        chars[i] = shuffled[i]                                          # puts the shuffled character in that spot
+    # Shuffle the letters and drop them back into the list
+    shuffled = random.sample(chars, len(chars))                         # scrambles a copy like a deck of cards
+    for i in range(len(chars)):
+        chars[i] = shuffled[i]
 
+    # Stick the scrambled letters back together into one string
     result = ""
-    for char in chars:                                                  # loops through each character
-        result += char                                                  # adds it to the result string
+    for char in chars:
+        result += char
 
-    return result
+    return result                                                       # the name, totally mixed up
 
 
 def palindrome_searcher(name):
@@ -187,10 +190,10 @@ def palindrome_searcher(name):
 
     Returns: boolean (True if first name is a palindrome, False if not)
     """
-    first = return_first_name(name)                                     # gets just the first name
-    lower = to_lowercase(first)                                         # lowercase so capitals don't matter
+    first = return_first_name(name)                                     # only cares about the first name
+    lower = to_lowercase(first)                                         # lowercase so "Anna" and "anna" match
 
-    return lower == reverse(lower)                                      # True if it matches its reverse
+    return lower == reverse(lower)                                      # same forwards and backwards? it's a palindrome
 
 
 def get_initials(name):
@@ -202,11 +205,11 @@ def get_initials(name):
     Returns: string (uppercase initials separated by periods)
     """
     parts = name.strip().split()
-    initials = ""                                                       # starts with no initials
-    for part in parts:                                                  # loops through each word
-        initials = initials + part[0] + "."                             # adds the first letter and a period
+    initials = ""                                                       # empty until we collect some letters
+    for part in parts:                                                  # one word at a time
+        initials = initials + part[0] + "."                             # grabs the first letter and adds a dot
 
-    return to_uppercase(initials)                                       # makes the initials capital
+    return to_uppercase(initials)                                       # capitals make initials look official
 
 
 def main():
@@ -217,10 +220,11 @@ def main():
 
     Returns: None
     """
-    name = input("This is the main menu, what is your name? ")          # asks for the name once
+    name = input("This is the main menu, what is your name? ")          # asked once, used everywhere
 
-    while True:                                                         # shows the menu until the user exits
-        print("1 reverse")                                              # prints the menu options
+    while True:                                                         # the menu keeps coming back until you quit
+        # Print out every option on the menu
+        print("1 reverse")
         print("2 vowel")
         print("3 consonant")
         print("4 first name")
@@ -233,10 +237,11 @@ def main():
         print("11 palindrome searcher")
         print("12 get initials")
         print("13 exit")
-        choice = input("Choose a number ")                              # asks which option to run
+        choice = input("Choose a number ")                              # pick your fighter
 
-        if choice == "1":                                               # checks which number the user picked
-            print(reverse(name))                                        # runs the function and prints the answer
+        # Match the number picked to its function, run it, and print the result
+        if choice == "1":
+            print(reverse(name))
         elif choice == "2":
             print(vowel_counter(name))
         elif choice == "3":
@@ -254,17 +259,17 @@ def main():
         elif choice == "9":
             print(to_uppercase(name))
         elif choice == "10":
-            print(randomize_letters(list(name)))                        # turns the name into a list first
+            print(randomize_letters(list(name)))                        # turns the name into a list so it can be shuffled
         elif choice == "11":
             print(palindrome_searcher(name))
         elif choice == "12":
             print(get_initials(name))
         elif choice == "13":
             print("Exiting the program. Goodbye!")
-            break                                                       # stops the loop and ends the program
-        else:                                                           # any other input is not a menu option
+            break                                                       # breaks out of the loop, game over
+        else:                                                           # anything that isn't 1-13 lands here
             print("Invalid choice, please try again.")
 
 
-if __name__ == "__main__":                                              # only runs when this file is run directly
-    main()                                                              # starts the program
+if __name__ == "__main__":                                              # only runs when you start this file directly
+    main()                                                              # and we're off!
