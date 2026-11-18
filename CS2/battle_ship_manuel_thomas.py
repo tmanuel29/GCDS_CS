@@ -109,10 +109,14 @@ def player_turn(board):
 
     if board[row][col] == "S":
         board[row][col] = "X"
-        print("You guessed " + spot + " and it Hit!")
-    else:
-        board[row][col] = "O"
-        print("You guessed " + spot + " and it Missed.")
+
+
+
+def report_hit(result):
+        if result == "hit":
+            print("You guessed and it Hit!")
+        else:
+            print("You guessed and it Missed.")
 
 
 def computer_guess(board):
@@ -167,6 +171,8 @@ def play_game():
         if not ships_left(player_board):
             print("The computer sank all your ships. You lose!")
             break
+
+
 
 
 play_game()
